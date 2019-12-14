@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+
+    <!-- Create tables -->
+
+    <changeSet id="createUsersTable" author="Yaroslav Minakov" runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="users"/>
+            </not>
+        </preConditions>
+        <createTable tableName="users">
+            <column name="id" type="VARCHAR(36)">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="first_name" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="last_name" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="specialty" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="createSkillsTable" author="Yaroslav Minakov" runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="skills"/>
+            </not>
+        </preConditions>
+        <createTable tableName="skills">
+            <column name="id" type="VARCHAR(36)">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="name" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="createUserSkillsTable" author="Yaroslav Minakov" runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="user_skills"/>
+            </not>
+        </preConditions>
+        <createTable tableName="user_skills">
+            <column name="user_id" type="VARCHAR(36)">
+                <constraints nullable="false" foreignKeyName="FK_user_skills_user_id"
+                             referencedTableName="users" referencedColumnNames="id" deleteCascade="true"/>
+            </column>
+            <column name="skill_id" type="VARCHAR(36)">
+                <constraints nullable="false" foreignKeyName="FK_user_skills_skill_id"
+                             referencedTableName="skills" referencedColumnNames="id" deleteCascade="true"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <!--Insert data-->
+
+    <changeSet id="updateUsersTable" author="Yaroslav Minakov" runOnChange="true">
+        <insert tableName="users">
+            <column name="id" value="7d770015-c6d4-4da5-91e8-ecb939bbb1e7"/>
+            <column name="first_name" value="Kobe"/>
+            <column name="last_name" value="Sanchez"/>
+            <column name="specialty" value="Junior Java Developer"/>
+        </insert>
+        <insert tableName="users">
+            <column name="id" value="cf120f71-f0a9-486e-b11c-dbe70241e2bf"/>
+            <column name="first_name" value="Leonardo"/>
+            <column name="last_name" value="Caldwell"/>
+            <column name="specialty" value="Junior Java Developer"/>
+        </insert>
+        <insert tableName="users">
+            <column name="id" value="213b52e3-ce1c-46e5-b5c7-f8dc17576f05"/>
+            <column name="first_name" value="Jaqueline"/>
+            <column name="last_name" value="Gonzales"/>
+            <column name="specialty" value="Junior Java Developer"/>
+        </insert>
+        <insert tableName="users">
+            <column name="id" value="e5d44cbc-28aa-403b-908d-ba2d6d041fe9"/>
+            <column name="first_name" value="Kameron"/>
+            <column name="last_name" value="Mosley"/>
+            <column name="specialty" value="Middle Java Developer"/>
+        </insert>
+        <insert tableName="users">
+            <column name="id" value="52147e21-56cf-4ed7-b9bf-70371981225f"/>
+            <column name="first_name" value="Donna"/>
+            <column name="last_name" value="Mejia"/>
+            <column name="specialty" value="Senior Java Developer"/>
+        </insert>
+    </changeSet>
+
+    <changeSet id="updateSkillsTable" author="Yaroslav Minakov" runOnChange="true">
+        <insert tableName="skills">
+            <column name="id" value="8f8f547f-3c16-4980-a1e6-d733a786c216"/>
+            <column name="name" value="Java 8"/>
+        </insert>
+        <insert tableName="skills">
+            <column name="id" value="2a6e6b3d-4850-4fed-bc75-29f26297a3d3"/>
+            <column name="name" value="Java 7"/>
+        </insert>
+        <insert tableName="skills">
+            <column name="id" value="7df08a6c-936a-49c3-9b12-1f5ec0277555"/>
+            <column name="name" value="Spring"/>
+        </insert>
+        <insert tableName="skills">
+            <column name="id" value="44623819-5d74-4258-ab8f-f6a7865b2220"/>
+            <column name="name" value="Hibernate"/>
+        </insert>
+        <insert tableName="skills">
+            <column name="id" value="4028924e-f5b4-48d2-b331-747cb751e6d2"/>
+            <column name="name" value="Maven"/>
+        </insert>
+        <insert tableName="skills">
+            <column name="id" value="dc6b582f-7989-4670-ae5f-98a7db7aae0c"/>
+            <column name="name" value="MySQL"/>
+        </insert>
+    </changeSet>
+
+    <changeSet id="updateUserSkillsTable" author="Yaroslav Minakov" runOnChange="true">
+        <insert tableName="user_skills">
+            <column name="user_id" value="7d770015-c6d4-4da5-91e8-ecb939bbb1e7"/>
+            <column name="skill_id" value="8f8f547f-3c16-4980-a1e6-d733a786c216"/>
+        </insert>
+        <insert tableName="user_skills">
+            <column name="user_id" value="cf120f71-f0a9-486e-b11c-dbe70241e2bf"/>
+            <column name="skill_id" value="8f8f547f-3c16-4980-a1e6-d733a786c216"/>
+        </insert>
+        <insert tableName="user_skills">
+            <column name="user_id" value="213b52e3-ce1c-46e5-b5c7-f8dc17576f05"/>
+            <column name="skill_id" value="8f8f547f-3c16-4980-a1e6-d733a786c216"/>
+        </insert>
+        <insert tableName="user_skills">
+            <column name="user_id" value="e5d44cbc-28aa-403b-908d-ba2d6d041fe9"/>
+            <column name="skill_id" value="8f8f547f-3c16-4980-a1e6-d733a786c216"/>
+        </insert>
+        <insert tableName="user_skills">
+            <column name="user_id" value="e5d44cbc-28aa-403b-908d-ba2d6d041fe9"/>
+            <column name="skill_id" value="4028924e-f5b4-48d2-b331-747cb751e6d2"/>
+        </insert>
+        <insert tableName="user_skills">
+            <column name="user_id" value="e5d44cbc-28aa-403b-908d-ba2d6d041fe9"/>
+            <column name="skill_id" value="dc6b582f-7989-4670-ae5f-98a7db7aae0c"/>
+        </insert>
+        <insert tableName="user_skills">
+            <column name="user_id" value="52147e21-56cf-4ed7-b9bf-70371981225f"/>
+            <column name="skill_id" value="2a6e6b3d-4850-4fed-bc75-29f26297a3d3"/>
+        </insert>
+        <insert tableName="user_skills">
+            <column name="user_id" value="52147e21-56cf-4ed7-b9bf-70371981225f"/>
+            <column name="skill_id" value="8f8f547f-3c16-4980-a1e6-d733a786c216"/>
+        </insert>
+        <insert tableName="user_skills">
+            <column name="user_id" value="52147e21-56cf-4ed7-b9bf-70371981225f"/>
+            <column name="skill_id" value="7df08a6c-936a-49c3-9b12-1f5ec0277555"/>
+        </insert>
+        <insert tableName="user_skills">
+            <column name="user_id" value="52147e21-56cf-4ed7-b9bf-70371981225f"/>
+            <column name="skill_id" value="44623819-5d74-4258-ab8f-f6a7865b2220"/>
+        </insert>
+        <insert tableName="user_skills">
+            <column name="user_id" value="52147e21-56cf-4ed7-b9bf-70371981225f"/>
+            <column name="skill_id" value="4028924e-f5b4-48d2-b331-747cb751e6d2"/>
+        </insert>
+        <insert tableName="user_skills">
+            <column name="user_id" value="52147e21-56cf-4ed7-b9bf-70371981225f"/>
+            <column name="skill_id" value="dc6b582f-7989-4670-ae5f-98a7db7aae0c"/>
+        </insert>
+    </changeSet>
+
+</databaseChangeLog>
