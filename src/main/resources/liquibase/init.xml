@@ -62,6 +62,111 @@
         </createTable>
     </changeSet>
 
+    <changeSet id="createTeamsTable" author="Yaroslav Minakov" runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="teams"/>
+            </not>
+        </preConditions>
+        <createTable tableName="teams">
+            <column name="id" type="VARCHAR(36)">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="name" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="createTeamUsersTable" author="Yaroslav Minakov" runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="team_users"/>
+            </not>
+        </preConditions>
+        <createTable tableName="team_users">
+            <column name="user_id" type="VARCHAR(36)">
+                <constraints nullable="false" foreignKeyName="FK_team_users_user_id"
+                             referencedTableName="users" referencedColumnNames="id" deleteCascade="true"/>
+            </column>
+            <column name="team_id" type="VARCHAR(36)">
+                <constraints nullable="false" foreignKeyName="FK_team_users_team_id"
+                             referencedTableName="teams" referencedColumnNames="id" deleteCascade="true"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="createProjectsTable" author="Yaroslav Minakov" runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="projects"/>
+            </not>
+        </preConditions>
+        <createTable tableName="projects">
+            <column name="id" type="VARCHAR(36)">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="name" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="budget" type="DECIMAL">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="createProjectTeamsTable" author="Yaroslav Minakov" runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="project_teams"/>
+            </not>
+        </preConditions>
+        <createTable tableName="project_teams">
+            <column name="project_id" type="VARCHAR(36)">
+                <constraints nullable="false" foreignKeyName="FK_project_teams_project_id"
+                             referencedTableName="projects" referencedColumnNames="id" deleteCascade="true"/>
+            </column>
+            <column name="team_id" type="VARCHAR(36)">
+                <constraints nullable="false" foreignKeyName="FK_project_teams_team_id"
+                             referencedTableName="teams" referencedColumnNames="id" deleteCascade="true"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="createCustomersTable" author="Yaroslav Minakov" runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="customers"/>
+            </not>
+        </preConditions>
+        <createTable tableName="customers">
+            <column name="id" type="VARCHAR(36)">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="name" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="createCustomerProjectsTable" author="Yaroslav Minakov" runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="customer_projects"/>
+            </not>
+        </preConditions>
+        <createTable tableName="customer_projects">
+            <column name="customer_id" type="VARCHAR(36)">
+                <constraints nullable="false" foreignKeyName="FK_customer_projects_customer_id"
+                             referencedTableName="customers" referencedColumnNames="id" deleteCascade="true"/>
+            </column>
+            <column name="project_id" type="VARCHAR(36)">
+                <constraints nullable="false" foreignKeyName="FK_customer_projects_project_id"
+                             referencedTableName="projects" referencedColumnNames="id" deleteCascade="true"/>
+            </column>
+        </createTable>
+    </changeSet>
+
     <!--Insert data-->
 
     <changeSet id="updateUsersTable" author="Yaroslav Minakov" runOnChange="true">
