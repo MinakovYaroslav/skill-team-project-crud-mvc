@@ -14,7 +14,7 @@
         <tomcat.version>7.0.86</tomcat.version>
         <thymeleaf.version>3.0.11.RELEASE</thymeleaf.version>
         <thymeleaf-layout-dialect.version>2.4.1</thymeleaf-layout-dialect.version>
-        <org.hibernate.version>5.4.5.Final</org.hibernate.version>
+        <org.hibernate.version>5.4.24.Final</org.hibernate.version>
         <lombok.version>1.18.8</lombok.version>
         <mysql.version>8.0.17</mysql.version>
         <liquibase.version>3.5.3</liquibase.version>
