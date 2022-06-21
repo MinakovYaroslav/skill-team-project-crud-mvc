@@ -16,7 +16,7 @@
         <thymeleaf-layout-dialect.version>2.4.1</thymeleaf-layout-dialect.version>
         <org.hibernate.version>5.4.5.Final</org.hibernate.version>
         <lombok.version>1.18.8</lombok.version>
-        <mysql.version>8.0.17</mysql.version>
+        <mysql.version>8.0.28</mysql.version>
         <liquibase.version>3.5.3</liquibase.version>
         <javax.servlet-api.version>4.0.1</javax.servlet-api.version>
         <bootstrap.version>4.3.1</bootstrap.version>
